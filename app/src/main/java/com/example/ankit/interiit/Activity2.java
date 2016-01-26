@@ -55,7 +55,7 @@ public class Activity2 extends AppCompatActivity {
 
                 temp = temp + Character.toString((char)c);
             }
-            System.out.println(temp);
+            System.out.println("in activity2"+temp);
 //            Toast.makeText(getBaseContext(),"file read", Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
@@ -79,8 +79,8 @@ public class Activity2 extends AppCompatActivity {
 
 //        }
 
-        System.out.println(con_num[0]);
-        System.out.println(finalcontact);
+        System.out.println("zero conatct"+con_num[0]);
+        System.out.println("final conatct"+finalcontact);
         String[] stockArr = new String[finalcontact.size()];
         stockArr = finalcontact.toArray(stockArr);
         ArrayAdapter<String> myAdapter=new
@@ -119,7 +119,11 @@ public class Activity2 extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
 
+    }
 
 
 

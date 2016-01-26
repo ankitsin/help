@@ -1,8 +1,10 @@
 package com.example.ankit.interiit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -160,7 +162,7 @@ public class Activity3 extends ListActivity {
     {
 //        lv=(ListView)findViewById(R.id.list_contact);
 
-        Cursor phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+        Cursor phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
         while (phones.moveToNext())
         {
             String name=phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
@@ -189,7 +191,7 @@ public class Activity3 extends ListActivity {
             FileOutputStream fOut = openFileOutput(file,Context.MODE_APPEND);
             for(int i=0;i<contacts.length;i++)
             {
-
+                System.out.println(contacts[i]);
                 fOut.write((contacts[i]+"_"+numbers[i]+"#").getBytes());
             }
             fOut.close();
@@ -203,36 +205,11 @@ public class Activity3 extends ListActivity {
 
 
 
-//        Set<String> set = new HashSet<String>();
-//        set.addAll(listOfExistingScores);
-//        scoreEditor.putStringSet("key", set);
-//        scoreEditor.commit();
-//        saveArray(contacts,"contacts_name",this);
-//        String data;
-//        private String file = "mydata";
-//        try {
-//            FileOutputStream fOut = openFileOutput(file,MODE_WORLD_READABLE);
-//            fOut.write(data.getBytes());
-//            fOut.close();
-//            Toast.makeText(getBaseContext(),"file saved",Toast.LENGTH_SHORT).show();
-//        }
-//
-//        catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
         back=(Button)findViewById(R.id.button_back);
         startActivity(new Intent(getApplicationContext(), Activity2.class));
         finish();
     }
-//    public boolean saveArray(String[] array, String arrayName, Context mContext) {
-//        SharedPreferences prefs = mContext.getSharedPreferences("preferencename", 0);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putInt(arrayName +"_size", array.length);
-//        for(int i=0;i<array.length;i++)
-//            editor.putString(arrayName + "_" + i, array[i]);
-//        return editor.commit();
-//    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -246,55 +223,11 @@ public class Activity3 extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//    private class LongOperation extends AsyncTask<String, Void, String> {
-//        @Override
-//        protected String doInBackground(String... params) {
-//            try{
-//                System.out.println(params[0]);
-////
-//                String name    = URLEncoder.encode(params[0], "UTF-8");
-//
-//                HttpClient Client = new DefaultHttpClient();
-//
-//                String URL = "http://192.168.0.111/interiit.php?name="+name;
-//                System.out.println(URL);
-//                HttpGet httpget = new HttpGet(URL);
-//
-//                String SetServerString = "";
-//                try
-//                {
-//
-//                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
-//                    SetServerString = Client.execute(httpget, responseHandler);
-//                    return  SetServerString;
-//
-//                }
-//                catch(Exception ex)
-//                {
-//                    System.out.println(ex.toString());
-//                    return "Fail!";
-//                }
-//
-//            }
-//            catch(UnsupportedEncodingException ex)
-//            {
-//                return "Fail2";
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            System.out.println(result);
-////            textView1.setText(result);
-//
-//
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//        }
 
-//        @Override
-//        protected void onProgressUpdate(Void... values) {
-//        }
+@Override
+    public void onBackPressed() {
+    startActivity(new Intent(getApplicationContext(), Activity2.class));
+    finish();
+
+    }
     }

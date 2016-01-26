@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     String number1;
     String password1;
     public static final String PREFS_NAME = "MyPrefsFile";
+//    public static final String LOGIN_NAME = "MyPrefsFile";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,9 @@ public class Login extends AppCompatActivity {
         number1=number.getText().toString();
         password1=password.getText().toString();
 //        contacts = (Button) findViewById(R.id.button_contacts);
+
+
+
         new LongOperation().execute(number1 + "_" + password1);
 
 
@@ -75,7 +79,7 @@ public class Login extends AppCompatActivity {
 
                 HttpClient Client = new DefaultHttpClient();
 
-                String URL = "http://192.168.0.111/login.php?auth="+name;
+                String URL = "http://192.168.0.106/login.php?auth="+name;
                 System.out.println(URL);
                 HttpGet httpget = new HttpGet(URL);
 
@@ -108,9 +112,13 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_LONG).show();
                 SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0); // 0 - for private mode
                 SharedPreferences.Editor editor = settings.edit();
+//                SharedPreferences.Editor login = getSharedPreferences(LOGIN_NAME, MODE_PRIVATE).edit();
+//                login.putString("user", number1);
 
 //Set "hasLoggedIn" to true
                 editor.putBoolean("hasLoggedIn", true);
+                editor.putString("user",number1);
+                editor.putString("first","Yes");
 
 // Commit the edits!
                 editor.commit();
@@ -137,7 +145,7 @@ public class Login extends AppCompatActivity {
 
                 HttpClient Client = new DefaultHttpClient();
 
-                String URL = "http://192.168.0.111/signup.php?auth="+name;
+                String URL = "http://192.168.0.106/signup.php?auth="+name;
                 System.out.println(URL);
                 HttpGet httpget = new HttpGet(URL);
 
@@ -173,10 +181,12 @@ public class Login extends AppCompatActivity {
 
 //Set "hasLoggedIn" to true
                 editor.putBoolean("hasLoggedIn", true);
+                editor.putString("user",number1);
 
 // Commit the edits!
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             }
             else
             {

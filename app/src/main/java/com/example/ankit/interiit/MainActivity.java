@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
@@ -79,29 +80,29 @@ public class MainActivity extends AppCompatActivity {
 //        boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 //        SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
 //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
-        first= settings.getString("first", null);
-        if(first=="Yes")
-        {
-            final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
-        dialog.setTitle("Loading...");
-        dialog.setMessage("Please wait.");
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        long delayInMillis = 20000;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                dialog.dismiss();
-            }
-            }, delayInMillis);
-        }
-        SharedPreferences.Editor editor = settings.edit();
-        editor.remove("first");
-        editor.putString("first", "No");
-        editor.commit();
+//        first= settings.getString("first", null);
+//        if(first=="Yes")
+//        {
+//            final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+//        dialog.setTitle("Loading...");
+//        dialog.setMessage("Please wait.");
+//        dialog.setIndeterminate(true);
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+//        long delayInMillis = 20000;
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                dialog.dismiss();
+//            }
+//            }, delayInMillis);
+//        }
+//        SharedPreferences.Editor editor = settings.edit();
+//        editor.remove("first");
+//        editor.putString("first", "No");
+//        editor.commit();
         MyLocation.LocationResult locationResult = new MyLocation.LocationResult(){
             @Override
             public void gotLocation(Location location){
@@ -206,7 +207,26 @@ public class MainActivity extends AppCompatActivity {
     public void buttonOnClickhelp(View v) {
 //        contacts = (Button) findViewById(R.id.button_help);
 //        startActivity(new Intent(getApplicationContext(), Activity2.class));
-        sendSMSMessage();
+//        final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+//        dialog.setTitle("Loading...");
+//        dialog.setMessage("Please wait.");
+//        dialog.setIndeterminate(true);
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+//        long delayInMillis = 20000;
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                dialog.dismiss();
+//            }
+//        }, delayInMillis);
+                        Toast.makeText(getApplicationContext(), "Help is on the Way", Toast.LENGTH_LONG).show();
+
+        Handler myHandler = new Handler();
+        myHandler.postDelayed(mMyRunnable, 15000);
+//        sendSMSMessage();
 //        sendBtn.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View view) {
 //
@@ -234,7 +254,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            sendSMSMessage();        }
+    };
 
 
     protected void sendSMSMessage() {
@@ -268,8 +294,7 @@ public class MainActivity extends AppCompatActivity {
             finalnumber.add(temp1[1].toString());
             String phoneNo = temp1[1].toString();
 
-            String message = "Yo Bitchesss!!    http://maps.google.com/?q="
-                    + lattitude + "," + longitude;
+            String message = "Please help me ("+user+").    http://maps.google.com/?q="+ lattitude + "," + longitude;
             System.out.println(message);
             try {
             SmsManager smsManager = SmsManager.getDefault();
@@ -476,8 +501,7 @@ public class MainActivity extends AppCompatActivity {
 //            finalnumber.add(temp1[1].toString());
             String phoneNo = nearby[i].toString();
 
-            String message = "Yo Bitchesss!!    http://maps.google.com/?q="
-                    + lattitude + "," + longitude;
+            String message = "Please help me ("+user+").       http://maps.google.com/?q="+ lattitude + "," + longitude;
             System.out.println(message);
             try {
                 SmsManager smsManager = SmsManager.getDefault();

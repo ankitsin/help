@@ -113,6 +113,12 @@ public class Activity2 extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), Activity3.class));
         finish();
     }
+    public void buttonOnClickdelete(View v)
+    {
+        addcontacts=(Button)findViewById(R.id.button_delete);
+        startActivity(new Intent(getApplicationContext(), Activity4.class));
+        finish();
+    }
 
     public void buttonOnClickbacktohelp(View v)
     {

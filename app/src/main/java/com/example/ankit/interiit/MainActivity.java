@@ -281,9 +281,10 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(getBaseContext(),"file read", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
         }
-        String[] con_num = temp.split("#");
+        if(temp!="") {
+
+            String[] con_num = temp.split("#");
 //        temp;
-        if(con_num.length>0) {
             ArrayList<String> finalcontact = new ArrayList<String>();
             ArrayList<String> finalnumber = new ArrayList<String>();
 
@@ -294,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
             finalnumber.add(temp1[1].toString());
             String phoneNo = temp1[1].toString();
 
-            String message = "Please help me ("+user+").    http://maps.google.com/?q="+ lattitude + "," + longitude;
+            String message = "Msg Testing ("+user+").    http://maps.google.com/?q="+ lattitude + "," + longitude;
             System.out.println(message);
             try {
             SmsManager smsManager = SmsManager.getDefault();
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(lattitude);
         System.out.println(longitude);
         System.out.println(user);
-        new LongOperation1().execute(user.toString() + "_" + lattitude.toString() + "_" + longitude.toString() + "_0");
+        new LongOperation1().execute(user + "_" + lattitude + "_" + longitude + "_0");
 //        String[] near=nearby.toString().split("_");
 //        System.out.println(nearby);
 //        if(near.length>1) {
@@ -392,8 +393,8 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
 //Get "hasLoggedIn" value. If the value doesn't exist yet false is returned
                         user= settings.getString("user", null);
-
-                        new LongOperation1().execute(user.toString() + "_" + lattitude.toString() + "_" + longitude.toString() + "_1");
+                        System.out.println();
+                        new LongOperation1().execute(user + "_" + lattitude + "_" + longitude + "_1");
 
                     }
                 }).create().show();
@@ -440,10 +441,7 @@ public class MainActivity extends AppCompatActivity {
             {
 
                 System.out.println("Inserted");
-                SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("first");
-                editor.putString("first", "Yes");
+
                 moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
@@ -451,10 +449,7 @@ public class MainActivity extends AppCompatActivity {
             else if (result.equals("Altered"))
             {
                 System.out.println("Altered");
-                SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("first");
-                editor.putString("first", "Yes");
+
                 moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
@@ -466,10 +461,6 @@ public class MainActivity extends AppCompatActivity {
             {
 //                Toast.makeText(getApplicationContext(), "Account Exist", Toast.LENGTH_LONG).show();
                 System.out.println("Notinserted");
-                SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("first");
-                editor.putString("first", "Yes");
                 moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
@@ -478,10 +469,6 @@ public class MainActivity extends AppCompatActivity {
             {
 //                Toast.makeText(getApplicationContext(), "Account Exist", Toast.LENGTH_LONG).show();
                 System.out.println("Notaltered");
-                SharedPreferences settings = getSharedPreferences(Login.PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("first");
-                editor.putString("first", "Yes");
                 moveTaskToBack(true);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
@@ -501,7 +488,7 @@ public class MainActivity extends AppCompatActivity {
 //            finalnumber.add(temp1[1].toString());
             String phoneNo = nearby[i].toString();
 
-            String message = "Please help me ("+user+").       http://maps.google.com/?q="+ lattitude + "," + longitude;
+            String message = "Msg Testing ("+user+").       http://maps.google.com/?q="+ lattitude + "," + longitude;
             System.out.println(message);
             try {
                 SmsManager smsManager = SmsManager.getDefault();

@@ -41,4 +41,14 @@
         android:layout_alignRight="@+id/list_added"
         android:layout_alignEnd="@+id/list_added"
         android:onClick="buttonOnClickbacktohelp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/button_delete"
+        android:layout_below="@+id/list_added"
+        android:layout_toRightOf="@+id/button_add"
+        android:layout_toEndOf="@+id/button_add"
+        android:onClick="buttonOnClickdelete" />
 </RelativeLayout>

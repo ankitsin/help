@@ -39,6 +39,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 //import com.google.gson.Gson;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -97,6 +98,8 @@ public class Activity3 extends ListActivity {
 
     ArrayList<String> added_contacts= new ArrayList<String>();
     ArrayList<String> added_numbers= new ArrayList<String>();
+    ArrayList<String> finalcontact= new ArrayList<String>();
+    ArrayList<String> finalnumber= new ArrayList<String>();
 //    public ArrayList getAddedContacts()
 //    {
 //        return added_contacts;
@@ -185,6 +188,41 @@ public class Activity3 extends ListActivity {
         contacts = added_contacts.toArray(contacts);
         String data="array";
         String file = "mydata";
+        String temp="";
+        try{
+            FileInputStream fin = openFileInput(file);
+            int c;
+
+
+            while( (c = fin.read()) != -1){
+
+                temp = temp + Character.toString((char)c);
+            }
+            System.out.println("in activity2"+temp);
+//            Toast.makeText(getBaseContext(),"file read", Toast.LENGTH_SHORT).show();
+        }
+        catch(Exception e){
+        }
+        String [] con_num=temp.split("#");
+
+        for(int i=0;i<con_num.length;i++)
+        {
+
+            String[] temp1=con_num[i].split("_");
+            if(temp1.length > 1)
+            {
+
+                finalcontact.add(temp1[0].toString());
+                finalnumber.add(temp1[1].toString());
+            }
+
+        }
+
+//        }
+
+
+
+
         try {
 //            FileOutputStream fOut = openFileOutput(file,MODE_WORLD_READABLE);
 
@@ -192,7 +230,15 @@ public class Activity3 extends ListActivity {
             for(int i=0;i<contacts.length;i++)
             {
                 System.out.println(contacts[i]);
-                fOut.write((contacts[i]+"_"+numbers[i]+"#").getBytes());
+                if(finalcontact.contains(contacts[i]))
+                {
+                    System.out.println(contacts[i]);
+                }
+                else
+                {
+
+                    fOut.write((contacts[i]+"_"+numbers[i]+"#").getBytes());
+                }
             }
             fOut.close();
 //            Toast.makeText(getBaseContext(),"file saved",Toast.LENGTH_SHORT).show();
